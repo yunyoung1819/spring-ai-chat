@@ -1,5 +1,6 @@
 package com.jscode.chat;
 
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
@@ -17,5 +18,10 @@ public class ChatConfig {
     @Bean
     public ChatMemory chatMemory() {
         return MessageWindowChatMemory.builder().maxMessages(10).build();
+    }
+
+    @Bean
+    public MessageChatMemoryAdvisor messageChatMemoryAdvisor(ChatMemory chatMemory) {
+        return MessageChatMemoryAdvisor.builder(chatMemory).build();
     }
 }
